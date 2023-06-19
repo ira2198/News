@@ -1,12 +1,12 @@
 @extends('layouts.index')
 
 @section('page.title')
-   {{ $news }} news 
+   {{ $category->category_name }} news 
 @endsection
 
 @section('content')
 
-   <h3  class="text-center mb-4">  {{ $news }} </h3>
+   <h3  class="text-center mb-4">  {{ $category->category_name }} </h3>
     
     <div class="row row-cols-1 row-cols-sm-2 d-flex justify-content-evenly mt-5">
 
@@ -19,21 +19,21 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $item['title'] }}</h5>
-                            <p class="card-text">{{ $item['description'] }}</p>
-                            <p class="card-text"><small class="text-body-secondary">{{ $item['author'] }}</small></p>
+                            <h5 class="card-title">{{ $item->title }}</h5>
+                            <p class="card-text">{{ $item->description }}</p>
+                            <p class="card-text"><small class="text-body-secondary">{{ $item->name }}  {{ $item->surname }}</small></p>
                             <div class="row g-0">
-                                <a class="navbar-brand text-primary-emphasis" href="{{ route('article', ['category' => $news, 'id' => $item['id']])}}">
+                                <a class="navbar-brand text-primary-emphasis" href="{{ route('article',  $item->id)}}">
                                     More detailed</a>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> 
             </div>
        
 
             @empty
-            There is no news
+            There is no news  
              
         @endforelse
 

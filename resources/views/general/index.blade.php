@@ -11,8 +11,9 @@
         <h3 class="text-center fw-normal mb-4">to our news portal!</h3>
     </div>
     <div class="flex-grow-1">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta obcaecati id illum, corporis recusandae quos quo aut voluptatem error repellendus fugiat dolorum eos magnam debitis exercitationem, vero at? Eum, qui.
+        This is a task for lesson 5, task 1
     </div>
+    <div class=""><img src="{{ asset('img/schemeBD.png') }}" class="img-fluid"></div>
 
 @endsection
     

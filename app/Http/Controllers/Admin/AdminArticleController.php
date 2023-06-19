@@ -17,12 +17,8 @@ class AdminArticleController extends Controller
     }
 
     public function store(Request $request)
-        {
-
-        $article= $request->only('title', 'category', 'text', 'author',);
-
-    // dd($article);
-       return view('news.article', compact('article'));
+    {
+        return $request;
     }
 
 }

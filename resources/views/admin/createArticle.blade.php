@@ -3,6 +3,7 @@
 
 @section('page.title', 'Create article')
 
+
 @section('content')
 
     <h2 class="descript text-center mb-5">Create article</h2>

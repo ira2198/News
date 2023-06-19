@@ -12,8 +12,8 @@
     @foreach ($categories as $category)
 
         <li class="list-group-item">
-        <a class="navbar-brand text-info-emphasis fw-medium" href ="{{ route('news.category', $loop->index+1) }}">
-        {{$category}}</a></li>
+        <a class="navbar-brand text-info-emphasis fw-medium" href ="{{ route('news.category', $category->id) }}">
+        {{$category->category_name}}</a></li>
 
     @endforeach
   

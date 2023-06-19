@@ -33,7 +33,7 @@
         <main class = "p-5 container-xl flex-grow-1">
             @yield('content')
         </main>  
-
+        
         <footer >
             @include('includes.footer')
         </footer>
