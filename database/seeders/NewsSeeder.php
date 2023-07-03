@@ -24,13 +24,13 @@ class NewsSeeder extends Seeder
     {
         $reponse = [];
 
-        for($i = 0; $i < 10; $i++){
+        for($i = 0; $i < 30; $i++){
             $reponse[]=[
                 'status' => NewsStatus::ACTIVE->value,
                 'user_id' => fake()->numberBetween($int1=1, $int2=10),
                 'categories_id' => fake()->numberBetween($int1=1, $int2=6),
 
-                'title' => fake()->text($maxNbChars = 50),            
+                'title' => fake()->text($maxNbChars = 40),            
 
                 'description'=> fake()->text($maxNbChars = 100),
                 'text'=> fake()->text($maxNbChars = 300),

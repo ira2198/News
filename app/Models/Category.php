@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -11,15 +12,15 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $table = 'categories';
-
-    public function getCategory():Collection
+    protected $fillable = [
+        'category_name',
+        'description',
+    ];
+    
+    public function scopeById(Builder $query, int $categoryId): void
     {
-        return DB::table($this->table)->get(['id', 'category_name', 'description']);
+        $query->where('id', $categoryId);
     }
 
-    public function getCategoryById(int $id):mixed
-    {
-        return DB::table($this->table)->find($id);
-    }
+
 }

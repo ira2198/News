@@ -18,6 +18,19 @@
                 <a class="navbar-brand" href="{{ route('admin.article.create') }}">Create article</a>
             </li>
             <li>
+                <a class="navbar-brand" href="{{ route('admin.categories.show') }}">Categories</a>
+            </li>
+            <li>
+                <a class="navbar-brand" href="{{ route('admin.create.category') }}">Create category</a>
+            </li>
+            <li>
+                <a class="navbar-brand" href="{{ route('admin.source.index') }}">Sources</a>
+            </li>
+            <li>
+                <a class="navbar-brand" href="{{ route('admin.source.create') }}">Crete sources</a>
+            </li>
+
+            <li>
                 <a class="navbar-brand" href="{{ route('admin.news.show') }}">News</a>
             </li>
         </ul>

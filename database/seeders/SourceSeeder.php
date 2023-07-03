@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class SourceInformationSeeder extends Seeder
+class SourceSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,7 @@ class SourceInformationSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('sources_information')->insert($this->getData());
+        DB::table('sources')->insert($this->getData());
     }
 
     
@@ -23,10 +23,10 @@ class SourceInformationSeeder extends Seeder
     {
         $reponse = [];
 
-        for($i = 0; $i < 10; $i++){
+        for($i = 0; $i < 30; $i++){
             $reponse[]=[
 
-                'name_source' => fake()->text($maxNbChars = 50), 
+                'name_source' => fake()->text($maxNbChars = 30), 
                 'description'=> fake()->text($maxNbChars = 150),
                 'links'=> fake()->url(),   
                 

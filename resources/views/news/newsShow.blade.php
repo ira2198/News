@@ -17,10 +17,10 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <div class="card-text text-primary-emphasis mb-2" style="text-align:end">{{ $item->category }}</div>
+                        <div class="card-text text-primary-emphasis mb-2" style="text-align:end">{{ $item->category->category_name }}</div>
                         <h5 class="card-title">{{ $item->title }}</h5>                        
                         <p class="card-text">{{ $item->description }}</p>
-                        <p class="card-text"><small class="text-body-secondary">{{ $item->name }}   {{ $item->surname }}</small></p>
+                        <p class="card-text"><small class="text-body-secondary">{{ $item->users->first_name }}  {{ $item->users->last_name }}</small></p>
                         <div class="row g-0">
                             <a class="navbar-brand text-primary-emphasis" href="{{ route('article', $item->id)}}">
                                 More detailed</a>
@@ -29,11 +29,11 @@
                 </div>
             </div>
         </div>
-
        @empty 
 
        <div>There is no news</div>          
        
     @endforelse
-
+</div>
+    {{ $newsList->links() }}
 @endsection

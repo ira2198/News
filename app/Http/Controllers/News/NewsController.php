@@ -5,38 +5,41 @@ namespace App\Http\Controllers\News;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\News;
+use App\Models\User;
+use App\Queries\NewsQueryBuilder;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 
 class NewsController extends Controller 
-{
-    public function index(int $idCategory)
+{ 
+    
+    
+    public function index(NewsQueryBuilder $newsQueryBuilder,  string $categoryId): View
     {
-        $categoryClass= app(Category::class);
-        $category = $categoryClass->getCategoryById($idCategory);
+        $category  = Category::find($categoryId);
+        $user = User::find($categoryId);
+        $newsList =  $newsQueryBuilder->getNewsByCategory($categoryId);   
         
-        $model = app( News::class );        
-        $newsList = $model->getNewsByCategory($idCategory);   
-        // dd($newsList);
-        return view('news.news', compact('newsList', 'category'));
+        return view('news.news', compact('newsList', 'category', 'user'));
     }
 
-    public function show()
-    { 
-        $model = app( News::class );   
-        $newsList = $model->getNews();
 
-        return view('news.newsShow', compact('newsList'));
+
+    public function show(NewsQueryBuilder $newsQueryBuilder, News $news):View
+    {    $user = User::find($news);
+        return view('news.newsShow',  ['newsList' => $newsQueryBuilder->getAll(), $user]);
     }
 
-    public function showArticle(int $id): View
-    {
-        $model = app( News::class ); 
-        $article = $model->getNewsById($id);
-    // dd($article);
-        return view('news.article', compact('article'));
-    }
+    
+
+    public function showArticle(News $article): View
+    {   
+        $category  = Category::find($article);
+        $user = User::find($article);
+
+        return view('news.article', ['article' => $article, $category, $user]);
+    }  
     
 }
 

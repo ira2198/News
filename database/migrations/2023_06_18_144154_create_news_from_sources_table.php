@@ -22,7 +22,7 @@ return new class extends Migration
 
             $table->foreignId('sources_id')
             ->references('id')
-            ->on('sources_information')
+            ->on('sources')
             ->cascadeOnDelete();
 
             $table->timestamps();

@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sources_information', function (Blueprint $table) {
-
+        Schema::create('sources', function (Blueprint $table) {
             $table->id();
+           
             $table->string('name_source', 150);
             $table->text('description', 150)->nullable();
             $table->string('links')->nullable();
-
+        
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sources_information');
+        Schema::dropIfExists('sources');
     }
 };

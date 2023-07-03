@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('news', function (Blueprint $table) {
     
         $table->id();
-        $table->enum('status', NewsStatus::news_status_all()); 
+        $table->enum('status', NewsStatus::all()); 
     
         $table->foreignId('user_id')
         ->references('id')
@@ -28,12 +28,12 @@ return new class extends Migration
         ->on('categories')
         ->cascadeOnDelete();
     
-        $table->string('title', 100);
+        $table->string('title', 60);
         $table->timestamps();
     
         $table->text('description', 200)->nullable();
-        $table->text('text')->nullable();
-        $table->string('main_img');
+        $table->text('text', 300)->nullable();
+        $table->string('main_img', 250);
     
         $table->index('status', 'title');
         });

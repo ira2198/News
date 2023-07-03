@@ -1,5 +1,6 @@
 @extends('layouts.index')
 
+{{-- {{ dd($newsList)}} --}}
 @section('page.title')
    {{ $category->category_name }} news 
 @endsection
@@ -21,7 +22,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $item->title }}</h5>
                             <p class="card-text">{{ $item->description }}</p>
-                            <p class="card-text"><small class="text-body-secondary">{{ $item->name }}  {{ $item->surname }}</small></p>
+                            <p class="card-text"><small class="text-body-secondary">{{ $item->users->first_name }}  {{ $item->users->last_name }}</small></p>
                             <div class="row g-0">
                                 <a class="navbar-brand text-primary-emphasis" href="{{ route('article',  $item->id)}}">
                                     More detailed</a>
@@ -30,13 +31,11 @@
                     </div>
                 </div> 
             </div>
-       
-
-            @empty
+        @empty
             There is no news  
              
         @endforelse
-
+        {{ $newsList->links() }}
     </div>   
     
      

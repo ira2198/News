@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
                 
                 'email'=> fake()->email(),
                 'phone' => fake()->phoneNumber(),
-                'avatar' => fake()->url(),
+                'avatar' => fake()->imageUrl(),
 
                 'password' => fake()->password($maxLength = 5),
                 
