@@ -20,6 +20,7 @@ class News extends Model
         'categories_id',
         'user_id',
         'status',
+        'main_img',
         'description',
         'text',
     ];

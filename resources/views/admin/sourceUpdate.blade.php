@@ -17,6 +17,7 @@
             <div class="">
                 <label  class="form-check-label mb-2 text-info-emphasis fw-medium">Source title</label>
                 <input type="text"name="name_source"placeholder="Title"class="form-control mb-3"value="{{$source->name_source}}">
+                @error("name_source")<p class="text-danger"> {{$message}}</p> @enderror  
             </div>
 
             <div class=""> 
@@ -24,6 +25,7 @@
                 <textarea placeholder="description"name="description"class="form-control mb-3"rows="3"value="{{$source->description }}">
                     {{ $source->description }}
                 </textarea>
+                @error("description")<p class="text-danger"> {{$message}}</p> @enderror  
             </div>
 
             <div class=""> 
@@ -31,6 +33,7 @@
                 <textarea placeholder="links"name="links"class="form-control mb-3"value="{{$source->links }}">
                     {{ $source->links }}
                 </textarea>
+                @error("links")<p class="text-danger"> {{$message}}</p> @enderror  
             </div>
             
             <button class="btn btn-info">Save</button>

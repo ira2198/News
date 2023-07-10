@@ -1,0 +1,22 @@
+{   
+    "The article was successfully created!": "Статья успешно создана!",
+    "Article creation error!":"Ошибка создания статьи!",
+    "The article has been successfully updated!":"Статья успешно обовлена!",
+    "Error updating the article!":"Ошибка обновления статьи!",
+
+    "The source has been successfully created!":"Запись успешно создана!",
+    "Source creation error!":"Ошибка создания записи!",
+    "The source has been successfully updated":"Запись успешно обовлена!",
+    "Error updating the sources!" :"Ошибка обновления записи!",
+
+    "The category has been successfully created!":"Категория успешно создана!",
+    "Category creation error!":" Ошибка создания записи!",
+    "The category has been successfully updated!":"Категория успешно обовлена!",
+    "Error updating the category!":"Ошибка обновления записи!",
+
+    "The user has been successfully created!":"Пользователь успешно создан",
+    "User creation error!":"Ошибка создания пользователя!",
+
+    "Record deleted!":"запись удалена!"
+
+}

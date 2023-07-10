@@ -5,7 +5,7 @@
 @section('content')
 
   
-<h2 class="text-center mb-4">Soutces</h2>
+<h2 class="text-center mb-4">Sources</h2>
 {{-- {{dd($sources)}} --}}
 
 <ul class="list-group list-group-flush">

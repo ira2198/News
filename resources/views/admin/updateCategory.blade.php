@@ -16,6 +16,7 @@
             <div class="">
                 <label  class="form-check-label mb-2 text-info-emphasis fw-medium">Category name</label>
                 <input type="text" name="category_name" placeholder="Title"  class="form-control mb-3" value="{{ $category->category_name}}">
+                @error("category_name")<p class="text-danger"> {{$message}}</p> @enderror
             </div>
 
             <div class=""> 
@@ -23,8 +24,8 @@
                 <textarea placeholder="description"  name="description"  class="form-control mb-3" rows="3" value="{{$category->description}}">
                     {{$category->description}}
                 </textarea>
+                @error("description")<p class="text-danger"> {{$message}}</p> @enderror
             </div>
-
            
             
             <button class="btn btn-info">Save</button>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminArticleController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\SourcesController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ForEveryone\AppealController;
 use App\Http\Controllers\ForEveryone\AuthorizationController;
 use App\Http\Controllers\ForEveryone\IndexController;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::get('auth', [AuthorizationController::class, 'index'])->name('authorization');
+
 Route::any('appeal', [AppealController::class, 'create'])->name('appeal.create');
 Route::any('appeal/check', [AppealController::class, 'store'])->name('appeal.check.store');
 
@@ -36,6 +38,13 @@ Route::get('source/{article}', [SourcesController::class, 'show'])->name('source
 //  Admin 
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], static function(){
+
+    //user
+    Route::get('user/login', [UserController::class, 'index'])->name('user.login');
+    Route::get('user/show', [UserController::class, 'show'])->name('user.show');
+    Route::any('user/create', [UserController::class, 'create'])->name('user.create');
+    Route::post('user/store', [UserController::class, 'store'])->name('user.store');
+    Route::delete('user/delete/{user}', [UserController::class, 'destroy'])->name('user.delete');
     
     // categories
     Route::any('create/category', [NewsCategoryController::class, 'create'])->name('create.category');
@@ -43,6 +52,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], static function(){
     Route::get('categories/show', [NewsCategoryController::class, 'show'])->name('categories.show');
     Route::any('category/edit/{category}', [NewsCategoryController::class, 'edit'])->name('edit.category');
     Route::post('category/update/{category}', [NewsCategoryController::class, 'update'])->name('update.category');
+    Route::any('category/delete/{category}', [NewsCategoryController::class, 'destroy'])->name('categories.delete');
 
     // sources
 
@@ -50,17 +60,21 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], static function(){
     Route::any('source/create', [SourcesController::class, 'create'])->name('source.create');
     Route::post('source/store', [SourcesController::class, 'store'])->name('source.store');
     Route::any('source/edit/{source}', [SourcesController::class, 'edit'])->name('source.edit');
-    Route::any('source/update{source}', [SourcesController::class, 'update'])->name('source.update');
+    Route::any('source/update/{source}', [SourcesController::class, 'update'])->name('source.update');
+    Route::any('source/delete/{source}', [SourcesController::class, 'destroy'])->name('source.delete');
+    
+  
 
     // index
     Route::get('index', [AdminController::class, 'index'])->name('index');
-    Route::get('news/{news?}', [AdminArticleController::class, 'show'])->name('news.show');
+    Route::any('news/{news?}', [AdminArticleController::class, 'show'])->name('news.show');
+    Route::any('news/delete/{news?}', [AdminArticleController::class, 'destroy'])->name('news.delete');
+
 
     // articles
     Route::any('article/create', [AdminArticleController::class, 'create'])->name('article.create');
     Route::any('article/store', [AdminArticleController::class, 'store'])->name('article.store');
     Route::any('article/edit/{news}', [AdminArticleController::class, 'edit'])->name('article.edit');   
     Route::any('article/update/{news}', [AdminArticleController::class, 'update'])->name('article.update');
-
     
 });

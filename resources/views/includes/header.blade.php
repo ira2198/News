@@ -1,7 +1,7 @@
 
 
 <nav class="navbar bg-body-tertiary">
-    <div class="header text-center  container-xl p-4 ">
+    <div class="header text-center container-lg">
         <div class="">
 
             <button class="btn  btn-dark"><a class ="nav-link" href="{{route('index')}}">
@@ -20,7 +20,7 @@
 
         <div class="">      
         <button class="btn btn-light" ><a class="navbar-brand" style="font-size: medium" href="{{ route('categories') }}">News by category</a></button>
-        <button class="btn btn-light" ><a class="navbar-brand" style="font-size: medium" href="{{ route('authorization') }}">Authorization</a></button>
+        <button class="btn btn-light" ><a class="navbar-brand" style="font-size: medium" href="{{ route('authorization') }}">Login</a></button>
         <button class="btn btn-light" ><a class="navbar-brand" style="font-size: medium" href="{{ route('admin.index') }}">Administration</a></button>
         <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Navigation</button>
     </div>    

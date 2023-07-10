@@ -1,0 +1,21 @@
+{   
+    "The article was successfully created!": "The article was successfully created!",
+    "Article creation error!":"Article creation error!",
+    "The article has been successfully updated!":"The article has been successfully updated!",
+    "Error updating the article!":"Error updating the article!",
+
+    "The source has been successfully created!":"The source has been successfully created!",
+    "Source creation error!":"source creation error!",
+    "The source has been successfully updated":"The source has been successfully updated",
+    "Error updating the sources!" :"Error updating the sources!",
+
+    "The category has been successfully created!":"The category has been successfully created!",
+    "Category creation error!":"Category creation error!",
+    "The category has been successfully updated!":"The category has been successfully updated!",
+    "Error updating the category!":"Error updating the category!",
+
+    "The user has been successfully created!":"The user has been successfully created!",
+    "User creation error!":"User creation error!",
+
+    "Record deleted!":"Record deleted!"
+}

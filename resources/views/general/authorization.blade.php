@@ -8,7 +8,9 @@
     <div class="d-flex flex-column align-items-center">
         <form class="d-flex flex-column w-50" action="" method ="post">
         
-            <input type="text" name="login" placeholder="login" class="form-control mb-3">
+            <input type="text" name="first_name" placeholder="first_name" class="form-control mb-3">
+
+            
             <input type="password" name="password" placeholder="password" class="form-control mb-3">
             <div class="mb-3">
                 <input type="checkbox" name="checkbox" class="form-check-input">
@@ -16,7 +18,7 @@
             </div>
             <button class="btn btn-primary">Enter</button>
         </form>
-        <button class="btn mt-4 btn-dark w-50"><a class ="nav-link" href="{{ route('index')}}">Exit</a></button>
+        <button class="btn mt-4 btn-dark w-50"><a class ="nav-link" href="{{ route('admin.user.create')}}">Registranion</a></button>
     </div>      
    
 

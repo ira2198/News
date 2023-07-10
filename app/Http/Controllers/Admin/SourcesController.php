@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Sources\Store;
+use App\Http\Requests\Sources\Update;
 use App\Models\News;
 use App\Models\Source;
 use App\Queries\SourcesQueryBuilder;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-
-
+use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class SourcesController extends Controller
 {
@@ -26,49 +28,51 @@ class SourcesController extends Controller
     }
 
     
-    public function store(Request $request)
+    public function store(Store $request)
     {
-        $source = $request->only(['name_source','description','links']);
- 
-        $source= Source::create($source);
+        $validated = $request->validated();  
+        $source= Source::create($validated);
         
-        if( $source !== false ) {                   
-            return (\redirect()->route('admin.source.index')-> with ('success', "OK"));
+        if( $source ) {                   
+            return (\redirect()->route('admin.source.index')-> with ('success', __("The source has been successfully created!")));
         }     
-        return (\back()->with('error', 'Source has not been create'));
-    } 
-    
+        return (\back()->with('error',  __('Source creation error!')));
+    }     
 
     
     public function show(int $article):View
     {
-        $sources = News::find($article);   
-    //    dd($sources);            
-        return view('news.sources', compact('sources'));
-       
+        $sources = News::find($article);  
+        return view('news.sources', compact('sources'));       
     }
 
     public function edit(Source $source): View
-    {
-     
+    {     
         return view('admin.sourceUpdate', ['source' => $source] );
     }
 
 
-    public function update(Request $request, Source $source): RedirectResponse
+    public function update(Update $request, Source $source): RedirectResponse
     {
-        $source =  $source->fill($request->only(['name_source','description','links',]));
+        $source =  $source->fill($request->validated());
         
         if( $source->save()) {
-            return (\redirect()->route('admin.source.index')->with('success', "OK"));
+            return (\redirect()->route('admin.source.index')->with('success', __( "The source has been successfully updated")));
         }
-        return (\back()->with('error', 'Category has not been update'));
+        return (\back()->with('error', __('Error updating the sources!')));
     }
     
   
    
-    public function destroy(string $id)
-    {
-        //
+    public function destroy(Source $source)
+    {     
+        try {            
+            $source->delete();   
+            return (response()->with('success', __("Record deleted!"))->json('Record deleted!'));
+
+        }catch(Throwable $exception) {
+            Log::error($exception->getMessage(), $exception->getTrace());
+            return \response()->json('error', 400);
+        }
     }
 }

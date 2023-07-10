@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\News\Store;
+use App\Http\Requests\News\Update;
 use App\Models\Category;
 use App\Models\News;
 use App\Models\User;
@@ -14,6 +16,8 @@ use App\Queries\UserQueryBuilder;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class AdminArticleController extends Controller
 {
@@ -44,27 +48,22 @@ class AdminArticleController extends Controller
 
         return view('admin.createArticle', compact('categories', 'sources'));
     }
+
     
-    public function store(Request $request):RedirectResponse
+    public function store(Store $request):RedirectResponse
     {
-        $sources = $request->input('sources');        
+        $validated = $request->validated(); 
+         //dd($news);
+        $news = News::create($validated);       
 
-        $news = $request->only(['title', 'user_id', 'description', 'categories_id', 'status', 'text']);
-        //dd($news);
+        if ($news) {          
+                $news->sources()->attach($request->getSources()); 
 
-        $news = News::create($news);
-       
-
-        if ($news !== false) {
-            if( $sources !== null) {
-                $news->sources()->attach($sources);  
-               
-                return (\redirect()->route('admin.news.show')-> with ('success', "OK"));
-            }
-        }
-        
-        return (\back()->with('error', 'News has not been create'));
+                return (\redirect()->route('admin.news.show')-> with ('success', __('The article was successfully created!')));           
+        }        
+        return (\back()->with('error', __('Article creation error!')));
     }
+
 
 
     public function show(NewsQueryBuilder $newsQueryBuilder, News $news, $status = 'all')
@@ -85,16 +84,27 @@ class AdminArticleController extends Controller
         ]);
     }
 
-    public function update(Request $request, News $news): RedirectResponse
-    {
-        $sources = $request->input('sources');
-        $news = $news->fill($request->only(['title', 'user_id', 'description', 'categories_id', 'status', 'text']));
-        
+    public function update(Update $request, News $news): RedirectResponse
+    { 
+       $news = $news->fill($request->validated());
         if($news->save()) {
-            $news->sources()->sync($sources);
-            return (\redirect()->route('admin.news.show')->with('success', "OK"));
+            $news->sources()->sync($request->getSources());
+            return (\redirect()->route('admin.news.show')->with('success', __('The article has been successfully updated!')));
         }
-        return (\back()->with('error', 'News has not been create'));
+        return (\back()->with('error', __('Error updating the article!')));
+    }
+
+
+    public function destroy(News $news)
+    {
+        try {            
+            $news->delete();   
+            return (response()->with('success', __("Record deleted!"))->json(('Record deleted!')));
+
+        }catch(Throwable $exception) {
+            Log::error($exception->getMessage(), $exception->getTrace());
+            return \response()->json('error', 400);
+        }
     }
     
 

@@ -5,15 +5,16 @@
 
 @section('content')
     
-<h2>News</h2>
+<h2>Users</h2>
     
         <table class="table ">
             <thead class="table-info">
                 <tr>
                     <th>#ID</th>
-                    <th>Categories</th>
-                    <th>Title</th>
-                    <th>Author</th>
+                    <th>Last name</th>
+                    <th>First name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
                     <th>Status</th>
                     <th>Date created</th>
                     <th class="text-center">Actions</th>
@@ -22,27 +23,28 @@
 
             <tbody>
                 
-                @foreach($newsList as $news)
+                @foreach($users as $item)
 
                     <tr>
-                        <th>{{ $news->id }}</td>
-                        <td>{{ $news->category->category_name}}</td>
-                        <td>{{ $news->title }}</td>
-                        <td>{{ $news->users->first_name }} {{ $news->users->last_name }}</td>
-                        <th>{{ $news->status }}</th>
-                        <td>{{ $news->created_at }}</td>
+                        <th>{{ $item->id }}</td>
+                        <td>{{ $item->first_name}}</td>
+                        <td>{{ $item->last_name}}</td>
+                        <td>{{ $item->email}}</td>
+                        <td>{{ $item->phone}}</td>
+                        <th>{{ $item->status }}</th>
+                        <td>{{ $item->created_at }}</td>
                         
                         <td  class="text-center">
                             <button class="btn btn-outline-primary btn-sm">
-                                <a  class="navbar-brand" href="{{route('source.article.show', $news->id)}}">
-                                    Sources
+                                <a  class="navbar-brand" >
+                                    Articles
                                 </a>
                             </button>
-                            <button class="btn btn-outline-danger btn-sm delete" rel="{{$news->id}}" value="/admin/news/delete">
+                            <button class="btn btn-outline-danger btn-sm delete" rel="{{$item->id}}" value="/admin/user/delete">
                                 Delete
                             </button>
                             <button class="btn btn-outline-success btn-sm" >
-                                <a class="navbar-brand" href="{{route('admin.article.edit', ['news'=>$news])}}">
+                                <a class="navbar-brand" >
                                     Redact
                                 </a>
                             </button>                       
@@ -53,7 +55,7 @@
             </tbody>
  
         </table>
-        {{ $newsList->links() }}
+        {{-- {{ $users->links() }} --}}
 
 @endsection
 

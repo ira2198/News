@@ -1,13 +1,10 @@
 @extends('layouts.index')
-
 @section('page.title', 'News')
-
 
 @section('content')
 
 <h2>Sources</h2>
-    <div class="mt-5 ">
-    
+    <div class="mt-5 ">    
         <table class="table ">
             <thead class="table-info">
                 <tr>
@@ -21,7 +18,6 @@
             </thead>
 
             <tbody>
-
                 @foreach($sources as $item)
 
                     <tr>
@@ -32,16 +28,21 @@
                         <td>{{ $item->created_at }}</td>
                         
                         <td  class="text-center">
-                            <button class="btn btn-outline-danger btn-sm">Delete</button>
+                            <button class="btn btn-outline-danger btn-sm delete" rel="{{$item->id}}" value="/admin/source/delete">
+                                Delete
+                            </button>
                             <button class="btn btn-outline-success btn-sm">
-                                <a class="navbar-brand" href="{{route('admin.source.edit', ['source'=>$item])}}">Redact</a>                            </button>                       
-                        </td>
-                      
+                                <a class="navbar-brand" href="{{route('admin.source.edit', ['source'=>$item])}}">
+                                    Redact
+                                </a>             
+                            </button>                       
+                        </td>                      
                 @endforeach
-
             </tbody>
-
         </table>
    {{$sources->links()}}
 
 @endsection
+@push('jsDel')
+<script type="text/javascript" src="{{ asset("js/delete.js") }}"></script>
+@endpush 
