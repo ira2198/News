@@ -14,6 +14,7 @@ return [
     */
 
     'default' => env('MAIL_MAILER', 'smtp'),
+    // 'default' => 'mailgun',
 
     /*
     |--------------------------------------------------------------------------
@@ -44,6 +45,9 @@ return [
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN'),
         ],
+
+//'driver' => env('MAIL_DRIVER', 'smtp'),
+
 
         'ses' => [
             'transport' => 'ses',

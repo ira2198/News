@@ -44,7 +44,7 @@
                                 Delete
                             </button>
                             <button class="btn btn-outline-success btn-sm" >
-                                <a class="navbar-brand" >
+                                <a class="navbar-brand" href="{{route('user.edit', ['user'=>$item])}}" >
                                     Redact
                                 </a>
                             </button>                       

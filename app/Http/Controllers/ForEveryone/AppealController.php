@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\ForEveryone;
 
 use App\Http\Controllers\Controller;
-use Dotenv\Validator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 

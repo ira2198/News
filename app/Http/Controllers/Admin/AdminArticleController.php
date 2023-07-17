@@ -15,7 +15,6 @@ use App\Queries\SourcesQueryBuilder;
 use App\Queries\UserQueryBuilder;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
@@ -58,8 +57,9 @@ class AdminArticleController extends Controller
 
         if ($news) {          
                 $news->sources()->attach($request->getSources()); 
-
-                return (\redirect()->route('admin.news.show')-> with ('success', __('The article was successfully created!')));           
+                $category  = Category::find($request->id);
+                $user = User::find($request->id);
+                return (\redirect()->route('article', [$news, $category, $user])-> with ('success', __('The article was successfully created!')));           
         }        
         return (\back()->with('error', __('Article creation error!')));
     }
@@ -89,7 +89,10 @@ class AdminArticleController extends Controller
        $news = $news->fill($request->validated());
         if($news->save()) {
             $news->sources()->sync($request->getSources());
-            return (\redirect()->route('admin.news.show')->with('success', __('The article has been successfully updated!')));
+            $category  = Category::find($request->id);
+            $user = User::find($request->id);
+        
+            return (\redirect()->route('article', [$news, $category, $user])->with('success', __('The article has been successfully updated!')));
         }
         return (\back()->with('error', __('Error updating the article!')));
     }

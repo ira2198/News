@@ -33,12 +33,12 @@ class NewsController extends Controller
 
     
 
-    public function showArticle(News $article): View
+    public function showArticle(News $news): View
     {   
-        $category  = Category::find($article);
-        $user = User::find($article);
+        $category  = Category::find($news);
+        $user = User::find($news);
 
-        return view('news.article', ['article' => $article, $category, $user]);
+        return view('news.article', ['article' => $news, $category, $user]);
     }  
     
 }

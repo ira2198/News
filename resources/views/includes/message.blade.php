@@ -1,10 +1,8 @@
 
 @if(session()->has('success'))
     <x-alert type="success"  :message="session()->get('success')"></x-alert>
-@elseif($errors->any())
-@foreach($errors->all() as $error)
-    <x-alert type="danger"  :message="$error"></x-alert>
-@endforeach
+@elseif(session()->has('error'))
+    <x-alert type="danger"  :message="session()->get('error')"></x-alert>
 @endif
 
 

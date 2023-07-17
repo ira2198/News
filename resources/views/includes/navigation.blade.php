@@ -4,9 +4,9 @@
     <li>
         <a class="navbar-brand" href="{{ route('admin.user.show') }}">Users</a>
     </li>
-    <li>
+    {{-- <li>
         <a class="navbar-brand" href="{{ route('authorization') }}">Login</a>
-    </li>
+    </li> --}}
     <li>
         <a class="navbar-brand" href="{{ route('categories') }}">Categories</a>  
         <ul>
@@ -15,9 +15,9 @@
     <li>
         <a class="navbar-brand" href="{{ route('news.show') }}">News</a>
     </li>
-    <li> 
+    {{-- <li> 
         <a class="navbar-brand" href="{{ route('authorization') }}">Authorization</a>        
-    </li>
+    </li> --}}
     <li>
         <a class="navbar-brand" href="{{ route('admin.index') }}">Administration</a>
         <ul>            

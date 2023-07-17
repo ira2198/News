@@ -28,7 +28,7 @@
 
             <div class="">
                 <label  class="form-check-label mb-2 text-info-emphasis fw-medium">Author</label>
-                <input type="text" name='user_id' placeholder="specify the number 1-10" class="form-control mb-3" value="{{ old('user_id') }}">
+                <input type="text" name='user_id' placeholder="specify the number 1-10" class="form-control mb-3" value="{{Auth::user()->id}}">
                 @error("user_id")<p class="text-danger"> {{$message}}</p> @enderror 
                 {{-- <input type="text" name='user_id' placeholder="Author" class="form-control mb-3" value="{{ old('user_id') }}">    --}}
             </div> 

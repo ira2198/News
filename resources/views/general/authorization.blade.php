@@ -6,7 +6,7 @@
 
 <h2 class="descript  text-center mb-5">Authorization</h2>
     <div class="d-flex flex-column align-items-center">
-        <form class="d-flex flex-column w-50" action="" method ="post">
+        <form class="d-flex flex-column w-50" action="" method ="get">
         
             <input type="text" name="first_name" placeholder="first_name" class="form-control mb-3">
 
