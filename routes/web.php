@@ -11,8 +11,16 @@ use App\Http\Controllers\ForEveryone\IndexController;
 use App\Http\Controllers\News\NewsCategoryController;
 use App\Http\Controllers\News\NewsController;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+
+
+
+  //account
+  Route::group(['prefix' => 'account'], static function(){
+    Route::get('/', AccountController::class)->name('account'); 
+    Route::get('edit/{user}', [UserController::class, 'edit'])->name('user.edit');
+    Route::any('update/{user?}', [UserController::class, 'update'])->name('user.update');
+});
 
 
 // For everyone
@@ -33,9 +41,10 @@ Route::get('source/{article}', [SourcesController::class, 'show'])->name('source
 
 
 //  Admin 
-Route::group(['middleware' =>'userRemote'], static function(){
+
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware'=>'auth'], static function(){
-    Route::group(['middleware'=>'admin'], static function(){
+    
+     Route::group(['middleware'=>'admin'], static function(){
 
         //user
         // Route::get('user/login', [UserController::class, 'index'])->name('user.login');
@@ -55,44 +64,38 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware'=>'auth'], stat
 
 
     });
+
+
     // sources
-
-    Route::get('categories/show', [NewsCategoryController::class, 'show'])->name('categories.show');
-
-    Route::get('source/index', [SourcesController::class, 'index'])->name('source.index');
-    Route::any('source/create', [SourcesController::class, 'create'])->name('source.create');
-    Route::post('source/store', [SourcesController::class, 'store'])->name('source.store');
-    Route::any('source/edit/{source}', [SourcesController::class, 'edit'])->name('source.edit');
-    Route::any('source/update/{source}', [SourcesController::class, 'update'])->name('source.update');
-    Route::any('source/delete/{source}', [SourcesController::class, 'destroy'])->name('source.delete');    
-  
-
-    // index
-    Route::get('index', [AdminController::class, 'index'])->name('index');
-    Route::any('news/{news?}', [AdminArticleController::class, 'show'])->name('news.show');
-    Route::any('news/delete/{news?}', [AdminArticleController::class, 'destroy'])->name('news.delete');
-
-           // articles
-    Route::any('article/create', [AdminArticleController::class, 'create'])->name('article.create');
-    Route::any('article/store', [AdminArticleController::class, 'store'])->name('article.store');
-    Route::any('article/edit/{news}', [AdminArticleController::class, 'edit'])->name('article.edit');   
-    Route::any('article/update/{news}', [AdminArticleController::class, 'update'])->name('article.update');
-
-    //account
-  
+    Route::middleware(['userRemote'])->group(function () {
     
+        Route::get('categories/show', [NewsCategoryController::class, 'show'])->name('categories.show');
+
+        Route::get('source/index', [SourcesController::class, 'index'])->name('source.index');
+        Route::any('source/create', [SourcesController::class, 'create'])->name('source.create');
+        Route::post('source/store', [SourcesController::class, 'store'])->name('source.store');
+        Route::any('source/edit/{source}', [SourcesController::class, 'edit'])->name('source.edit');
+        Route::any('source/update/{source}', [SourcesController::class, 'update'])->name('source.update');
+        Route::any('source/delete/{source}', [SourcesController::class, 'destroy'])->name('source.delete');    
+    
+
+        // index
+        Route::get('index', [AdminController::class, 'index'])->name('index');
+        Route::any('news/{news?}', [AdminArticleController::class, 'show'])->name('news.show');
+        Route::any('news/delete/{news?}', [AdminArticleController::class, 'destroy'])->name('news.delete');
+
+            // articles
+        Route::any('article/create', [AdminArticleController::class, 'create'])->name('article.create');
+        Route::any('article/store', [AdminArticleController::class, 'store'])->name('article.store');
+        Route::any('article/edit/{news}', [AdminArticleController::class, 'edit'])->name('article.edit');   
+        Route::any('article/update/{news}', [AdminArticleController::class, 'update'])->name('article.update');   
+    
+    });  
+
 });
 
-Route::group(['prefix' => 'account'], static function(){
-    Route::get('/', AccountController::class)->name('account'); 
-    Route::get('edit/{user}', [UserController::class, 'edit'])->name('user.edit');
-    Route::any('update/{user?}', [UserController::class, 'update'])->name('user.update');
-});
 
 
-
-
-});
 // sessions
 
 Auth::routes();

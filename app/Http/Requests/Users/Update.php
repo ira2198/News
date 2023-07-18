@@ -4,8 +4,13 @@ namespace App\Http\Requests\Users;
 
 use App\Enums\UserStatus;
 use App\Models\User;
+use App\Queries\UserQueryBuilder;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
+
 
 class Update extends FormRequest
 {
@@ -24,22 +29,22 @@ class Update extends FormRequest
      *
      * @return array<string, mixed> 
      * 
-     */
-   
+     */  
 
 
     public function rules()
-    {
-        return [
+    {  
+      return  [
             'last_name'=> ['required', 'string', 'min:2', 'max:150'],
             'first_name'=> ['required', 'string', 'min:2', 'max:150'],
             'password'=> ['required', 'string', 'min:4'],
             'current_password'=> ['nullable', 'string', 'current_password'],
-            'email' => ['required', 'string','email', 'unique:users,email,'.$this->user()->id],
+            'email' => ['required', 'string','email', Rule::unique('users')->ignore($this->user->id)],          
             'phone'=>['required', 'string'],
-            'status'=>['required', new Enum(UserStatus::class)],
+            'status'=>['nullable', new Enum(UserStatus::class)],
             'avatar'=>['nullable', 'file', 'img', 'max:1024'],
-            ];
+        ];
+        
         }
     }
 

@@ -48,11 +48,10 @@ class UserController extends Controller
 
     public function update(Update $request, User $user): RedirectResponse
     { 
-        
         $user = $user->fill($request->validated());  
 
         if($user->save()) {           
-            return (\redirect()->route('admin.news.show')
+            return (\redirect()->route('account')
             ->with('success', __('The account has been successfully updated!')));
         }
         return (\back()->with('error', __('Error updating the account!')));

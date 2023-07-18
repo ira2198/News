@@ -7,7 +7,7 @@
 <h2 class="descript  text-center mb-5">Edit account</h2>
     <div class="d-flex flex-column align-items-center">
 
-        <form class="d-flex flex-column w-50" action="{{route('user.update')}}" method ="post">
+        <form class="d-flex flex-column w-50" action="{{route('user.update', ['user' => $user])}}" method ="post">
             @csrf
         
             <div class="">
@@ -80,7 +80,7 @@
                 <input type="checkbox" name="agree" class="form-check-input">
                 <label  class="form-check-label">I agree to the processing of personal data</label>
             </div>
-            <button class="btn btn-primary">Register</button>
+            <button class="btn btn-primary">Save</button>
         </form>
         <button class="btn mt-4 btn-dark w-50"><a class ="nav-link" href="{{ route('account')}}">Exit</a></button>
     </div>      

@@ -19,10 +19,13 @@ class UserRemote
     {
         
         $user = Auth::user();
-        if ($user->status === 'remote') {
 
-            return (\back()->with('error', __('You do not have access rights, please contact the administrator!')));
-        }
-        return $next($request);
+        if ($user->status !== 'remote') {
+            return $next($request); 
+            
+        } else {
+            return (\back()->with('error', __('You do not have access rights, please contact the administrator!'))); 
+       }
+       
     }
 }
