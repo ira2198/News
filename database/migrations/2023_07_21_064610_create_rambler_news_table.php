@@ -13,17 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('news_from_sources', function (Blueprint $table) {
-            
-            $table->foreignId('news_id')
-            ->references('id')
-            ->on('news')
-            ->cascadeOnDelete();
+        Schema::create('rambler_news', function (Blueprint $table) {
+            $table->id();
 
-            $table->foreignId('sources_id')
-            ->references('id')
-            ->on('sources')
-            ->cascadeOnDelete();
+            $table->string('title', 160 );
+            $table->string('link', 200);
+            $table->text('description', 2000);
+            $table->string('author', 60);
+
 
             $table->timestamps();
         });
@@ -36,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('news_from_sources');
+        Schema::dropIfExists('rambler_news');
     }
 };

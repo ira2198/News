@@ -7,7 +7,7 @@
 
             <div class="card ">
                 <div class="card-header bg-info-subtle text-emphasis-info h4 mb-3">
-                    {{Auth::user()->first_name}} {{Auth::user()->last_name}} 
+                    {{Auth::user()->name}} 
                 </div>
 
                 <div class="card-body ">

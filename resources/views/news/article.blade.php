@@ -9,7 +9,7 @@
 <div class="descript  text-end mb-5 text-info-emphasis"> 
     <div>category: {{$article->category->category_name}}</div>
     <div>id: {{($article->id) ?? 0}}</div>
-    <div >author: {{$article->users->first_name}} {{$article->users->last_name}}</div>
+    <div >author: {{$article->users->name}} </div>
     <div>date of publication: {{($article->created_at) ?? "00:00:00" }}</div>
 </div>
 

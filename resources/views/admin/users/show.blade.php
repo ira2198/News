@@ -10,9 +10,8 @@
         <table class="table ">
             <thead class="table-info">
                 <tr>
-                    <th>#ID</th>
-                    <th>Last name</th>
-                    <th>First name</th>
+                    <th>#ID</th>                   
+                    <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Status</th>
@@ -27,8 +26,7 @@
 
                     <tr>
                         <th>{{ $item->id }}</td>
-                        <td>{{ $item->first_name}}</td>
-                        <td>{{ $item->last_name}}</td>
+                        <td>{{ $item->name}}</td>
                         <td>{{ $item->email}}</td>
                         <td>{{ $item->phone}}</td>
                         <th>{{ $item->status }}</th>

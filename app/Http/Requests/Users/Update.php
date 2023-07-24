@@ -35,8 +35,7 @@ class Update extends FormRequest
     public function rules()
     {  
       return  [
-            'last_name'=> ['required', 'string', 'min:2', 'max:150'],
-            'first_name'=> ['required', 'string', 'min:2', 'max:150'],
+            'name'=> ['required', 'string', 'min:2', 'max:150'],
             'password'=> ['required', 'string', 'min:4'],
             'current_password'=> ['nullable', 'string', 'current_password'],
             'email' => ['required', 'string','email', Rule::unique('users')->ignore($this->user->id)],          

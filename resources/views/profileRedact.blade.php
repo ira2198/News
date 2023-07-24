@@ -12,15 +12,10 @@
         
             <div class="">
                 <label  class="form-check-label mb-2 text-info-emphasis fw-medium">Name</label>
-                <input type="text" name="first_name" placeholder="Your name"  class="form-control mb-3" value="{{$user->first_name}}">
-                @error("first_name")<p class="text-danger"> {{$message}}</p> @enderror                
+                <input type="text" name="name" placeholder="Your name"  class="form-control mb-3" value="{{$user->name}}">
+                @error("name")<p class="text-danger"> {{$message}}</p> @enderror                
             </div>
 
-            <div class="">
-                <label  class="form-check-label mb-2 text-info-emphasis fw-medium">Last name</label>
-                <input type="text" name="last_name" placeholder="your last name"  class="form-control mb-3" value="{{$user->last_name}}">
-                @error("last_name")<p class="text-danger"> {{$message}}</p> @enderror                
-            </div>
 
              @if (Auth::user()->id === $user->id)
                 <div class="">

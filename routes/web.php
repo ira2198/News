@@ -3,15 +3,35 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Admin\AdminArticleController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ParserController;
 use App\Http\Controllers\Admin\SourcesController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ExchangeRatesController;
 use App\Http\Controllers\ForEveryone\AppealController;
 use App\Http\Controllers\ForEveryone\AuthorizationController;
 use App\Http\Controllers\ForEveryone\IndexController;
+use App\Http\Controllers\ForEveryone\YandexNewsController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\News\NewsCategoryController;
 use App\Http\Controllers\News\NewsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SocialProvidersController;
+
+
+// Guest's
+
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/{driver}/redirect', [SocialProvidersController::class, 'redirect'])
+        ->where('driver', '\w+')
+        ->name('social-providers.redirect');
+ 
+    Route::get('{driver}/callback', [SocialProvidersController::class, 'callback'])
+        ->where('driver', '\w+')
+        ->name('social-providers.callback');
+ });
+
 
 
 
@@ -25,8 +45,10 @@ use Illuminate\Support\Facades\Route;
 
 // For everyone
 
-Route::get('/', [IndexController::class, 'index'])->name('index');
+Route::get('/', [IndexController::class, 'index'] )->name('index');
 //Route::get('ayth', [AuthorizationController::class, 'index'])->name('authorization');
+Route::any('parser', ParserController::class)->name('parser');
+
 
 Route::any('appeal', [AppealController::class, 'create'])->name('appeal.create');
 Route::any('appeal/check', [AppealController::class, 'store'])->name('appeal.check.store');
@@ -65,6 +87,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware'=>'auth'], stat
 
     });
 
+    
 
     // sources
     Route::middleware(['userRemote'])->group(function () {
@@ -99,7 +122,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware'=>'auth'], stat
 // sessions
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
 
 Route::get('/sessions' , function(){
     

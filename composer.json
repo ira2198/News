@@ -9,8 +9,13 @@
         "guzzlehttp/guzzle": "^7.7",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
+        "laravel/socialite": "^5.8",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.2",
+        "orchestra/parser": "^7.0",
+        "seyyedam7/laravel-html-parser": "^2.2",
+        "socialiteproviders/github": "*",
+        "socialiteproviders/vkontakte": "^5.0",
         "symfony/http-client": "^6.2",
         "symfony/mailgun-mailer": "^6.2"
     },

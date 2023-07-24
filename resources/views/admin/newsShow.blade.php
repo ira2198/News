@@ -2,7 +2,6 @@
 
 @section('page.title', 'News')
 
-
 @section('content')
     
 <h2>News</h2>
@@ -28,7 +27,7 @@
                         <th>{{ $news->id }}</td>
                         <td>{{ $news->category->category_name}}</td>
                         <td>{{ $news->title }}</td>
-                        <td>{{ $news->users->first_name }} {{ $news->users->last_name }}</td>
+                        <td>{{ $news->users->name }}</td>
                         <th>{{ $news->status }}</th>
                         <td>{{ $news->created_at }}</td>
                         
