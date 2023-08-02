@@ -13,6 +13,7 @@ use App\Queries\NewsQueryBuilder;
 use App\Queries\QueryBuilder;
 use App\Queries\SourcesQueryBuilder;
 use App\Queries\UserQueryBuilder;
+use App\Services\Contracts\Upload;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Log;
@@ -49,11 +50,15 @@ class AdminArticleController extends Controller
     }
 
     
-    public function store(Store $request):RedirectResponse
+    public function store(Store $request, Upload $upload): RedirectResponse
     {
         $validated = $request->validated(); 
          //dd($news);
-        $news = News::create($validated);       
+            
+        if ($request->hasFile("main_img")){
+            $news['main_img'] = $upload->addFile($request->file('main_img'));
+         } 
+         $news = News::create($validated);
 
         if ($news) {          
                 $news->sources()->attach($request->getSources()); 
@@ -84,9 +89,14 @@ class AdminArticleController extends Controller
         ]);
     }
 
-    public function update(Update $request, News $news): RedirectResponse
+    public function update(Update $request, News $news, Upload $upload): RedirectResponse
     { 
-       $news = $news->fill($request->validated());
+        $news = $news->fill($request->validated());
+        
+        if ($request->hasFile("main_img")){
+           $news['main_img'] = $upload->addFile($request->file('main_img'));
+        } 
+
         if($news->save()) {
             $news->sources()->sync($request->getSources());
             $category  = Category::find($request->id);

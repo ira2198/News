@@ -16,6 +16,6 @@ interface Parser
     /**
      * @return void
      */
-    public function saveParseData(): array;
+    public function saveParseData();
 
 }

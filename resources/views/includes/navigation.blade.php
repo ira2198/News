@@ -39,6 +39,9 @@
             <li>
                 <a class="navbar-brand" href="{{ route('admin.source.create') }}">Crete sources</a>
             </li>
+            <li>
+                <a class="navbar-brand" href="{{ route('admin.resource.create') }}">Crete resources</a>
+            </li>
         </ul>
     </li>
     <li>

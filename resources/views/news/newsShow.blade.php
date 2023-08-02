@@ -13,7 +13,12 @@
         <div class="card  mb-5" style="max-width: 520px;">
             <div class="row g-0">
                 <div class="col-md-4" style="overflow: hidden; display: flex; justify-content: center; align-items: center;">
-                    <img src="{{ asset('img/planet.jpg') }}" class="img-fluid" style=" height: 100%; width: 100%; object-fit: cover;" alt="...">
+                    @if(current(explode('/', $item->main_img)) === 'http:')
+                    <img src="{{ asset($item->main_im) }}" class="img-fluid" style=" height: 100%; width: 100%; object-fit: cover;" alt="...">
+                 @else 
+                    <img src="{{ Storage::disk('public')->url($item->main_img)}}" class="img-fluid" style=" height: 100%; width: 100%; object-fit: cover;" alt="...">  
+                
+                @endif
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">

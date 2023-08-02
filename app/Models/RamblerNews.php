@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,6 +18,11 @@ class RamblerNews extends Model
         'description',
        
     ];
+
+    public function scopeResource(Builder $query, string $resource): void
+    {
+        $query->where('author', $resource);
+    }
 
 
 }

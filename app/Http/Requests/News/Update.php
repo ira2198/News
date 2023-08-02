@@ -26,18 +26,20 @@ class Update extends FormRequest
 
     public function rules():array
     {   
+        
         return [
            'title' => ['required', 'string', 'min:3', 'max:150'],
            'categories_id' => ['required', 'exists:categories,id'],
            'user_id' => ['required', 'exists:users,id'],// 'string', 'min: ', 'max: '
            'status' => ['required', new Enum(NewsStatus::class)],
            'sources.*' => ['required','exists:sources,id'],
-           'main_img' => ['sometimes'],
+           'main_img' => ['sometimes', 'image', 'mimes:jpg,jpeg,bmp,png,svg'],
            'description' => ['nullable', 'string','min:6','max:300'],
            'text' => ['required', 'string', 'max:30000'],
         ];
 
     }
+    //,'image','mimes:jpeg,jpg,bmp,png,svg'
 
     public function getSources():array
     {

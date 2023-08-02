@@ -7,8 +7,8 @@
 @section('content')
     <h2 class="descript text-center mb-5">Update  article</h2>
     <div class="d-flex flex-column align-items-center">
-
-        <form class="d-flex flex-column w-50" action="{{route ('admin.article.update', ['news'=> $news])}}" method ="post">
+        {{-- enctype="multipart/form-data" --}}
+        <form class="d-flex flex-column w-50" action="{{route ('admin.article.update', ['news'=> $news])}}"  enctype="multipart/form-data" method ="post">
             @csrf
             @method('put')
 
@@ -76,14 +76,33 @@
                 @error("status")<p class="text-danger"> {{$message}}</p> @enderror
             </div>
 
+            <div class="">
+                <label for="main_img" class="form-check-label mb-2 text-info-emphasis fw-medium">Image</label>
+                <img src="{{ Storage::disk('public')->url($news->main_img) }}" />
+                <input type="file" name="main_img" id="main_img" class="form-control mb-3" value="{{$news->main_img}}">
+                @error("main_img")<p class="text-danger"> {{$message}}</p> @enderror 
+                
+            </div> 
+
+
             <div class=" mb-4"> <p class="text-info-emphasis fw-medium">Content:</p>
                 <input id="x" value="" type="hidden" name="text" value="{{$news->text}}">
-                <trix-editor input="x" value="{{$news->text}}">{{$news->text}}</trix-editor>
+                <textarea name="text" id="text">{{$news->text}}</textarea>
                 @error("text")<p class="text-danger"> {{$message}}</p> @enderror
             </div>
             
             <button class="btn btn-info">Save</button>
         </form>
-     
+        @push('jsTextEditor')
+
+        <script>
+            ClassicEditor
+                .create( document.querySelector( '#text' ) )
+                .catch( error => {
+                    console.error( error );
+                } );
+        </script>
+            
+        @endpush
 
 @endsection

@@ -3,9 +3,11 @@
 
 namespace App\Services;
 
+use App\Models\RamblerNews;
 use App\Services\Contracts\Parser;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Facade as FacadesFacade;
+use Illuminate\Support\Facades\Storage;
 use Orchestra\Parser\Xml\Facade;
 
 class ParserService implements Parser
@@ -19,7 +21,7 @@ class ParserService implements Parser
         return $this;
     }
 
-    public function saveParseData(): array
+    public function saveParseData()
     {
         $xml = Facade::load($this->link);
 
@@ -42,8 +44,22 @@ class ParserService implements Parser
             ],
         ]);
 
-        return $data;
-        //dd($data);
-       
+        $explode = explode('/', $this->link);
+        $fileName = end($explode);
+        
+        Storage::append('parse/' . $fileName . 'txt', json_encode($data, true));
+        
+        foreach ($data['news'] as $item){
+
+            $item['pub_date']=$item['pubDate'];
+            unset($item['pubDate']);
+        
+                //    dd($item);
+            RamblerNews::create($item);
+
+        }     
+    
     }
+
+    
 }

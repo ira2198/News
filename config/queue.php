@@ -11,7 +11,7 @@ return [
     | API, giving you convenient access to each back-end using the same
     | syntax for every one. Here you may define a default connection.
     |
-    */
+    */  
 
     'default' => env('QUEUE_CONNECTION', 'sync'),
 

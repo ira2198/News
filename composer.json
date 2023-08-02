@@ -8,6 +8,7 @@
         "php": "^8.0.2",
         "guzzlehttp/guzzle": "^7.7",
         "laravel/framework": "^9.19",
+        "laravel/helpers": "^1.6",
         "laravel/sanctum": "^3.0",
         "laravel/socialite": "^5.8",
         "laravel/tinker": "^2.7",
@@ -17,7 +18,8 @@
         "socialiteproviders/github": "*",
         "socialiteproviders/vkontakte": "^5.0",
         "symfony/http-client": "^6.2",
-        "symfony/mailgun-mailer": "^6.2"
+        "symfony/mailgun-mailer": "^6.2",
+        "unisharp/laravel-filemanager": "^1.8"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.8",
