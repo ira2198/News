@@ -36,7 +36,7 @@ class Store extends FormRequest
             'user_id' => ['required', 'exists:users,id'],// 'string', 'min: ', 'max: '
             'status' => ['required', new Enum(NewsStatus::class)],
             'sources.*' => ['required','exists:sources,id'],
-            'main_img' => ['sometimes'],
+            'main_img' => ['sometimes', 'image', 'mimes:jpg,jpeg,bmp,png,svg'],
             'description' => ['nullable', 'string','min:6','max:300'],
             'text' => ['required', 'string', 'max:30000'],
          ];

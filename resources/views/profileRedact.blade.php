@@ -7,7 +7,7 @@
 <h2 class="descript  text-center mb-5">Edit account</h2>
     <div class="d-flex flex-column align-items-center">
 
-        <form class="d-flex flex-column w-50" action="{{route('user.update', ['user' => $user])}}" method ="post">
+        <form class="d-flex flex-column w-50" action="{{route('user.update', ['user' => $user])}}" enctype="multipart/form-data" method ="post">
             @csrf
         
             <div class="">

@@ -22,9 +22,14 @@ class IndexController extends Controller
         $json = json_encode($currencies->saveParseData());
         $currencies=json_decode($json, true);
        
-        return view('general.index', ['ramblerNews'=> $ramblerNewsQueryBuilder->getAll(),'currencies'=> $currencies]);
+        
+        return view('general.index', [
+            'ramblerNews'=> $ramblerNewsQueryBuilder->getAll(),
+            'currencies'=> $currencies,
+        ]);
     
     }
    
+    
 
 }

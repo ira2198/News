@@ -4,20 +4,21 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Admin\AdminArticleController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ParserController;
+use App\Http\Controllers\Admin\ResourcesController;
 use App\Http\Controllers\Admin\SourcesController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\ExchangeRatesController;
 use App\Http\Controllers\ForEveryone\AppealController;
-use App\Http\Controllers\ForEveryone\AuthorizationController;
 use App\Http\Controllers\ForEveryone\IndexController;
-use App\Http\Controllers\ForEveryone\YandexNewsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\News\NewsCategoryController;
 use App\Http\Controllers\News\NewsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SocialProvidersController;
+use Unisharp\Laravelfilemanager\controllers\LfmController;
+use Unisharp\Laravelfilemanager\controllers\UploadController;
+
+
 
 
 // Guest's
@@ -76,6 +77,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware'=>'auth'], stat
         // Route::post('user/store', [UserController::class, 'store'])->name('user.store');
         Route::delete('user/delete/{user}', [UserController::class, 'destroy'])->name('user.delete');
 
+        //resources
+
+        Route::get('resource/create', [ResourcesController::class, 'create'])->name('resource.create');
+        Route::post('resourse/store', [ResourcesController::class, 'store'])->name('resource.store');
+      
              
         // categories
         Route::any('create/category', [NewsCategoryController::class, 'create'])->name('create.category');
@@ -108,14 +114,16 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware'=>'auth'], stat
         Route::any('news/delete/{news?}', [AdminArticleController::class, 'destroy'])->name('news.delete');
 
             // articles
-        Route::any('article/create', [AdminArticleController::class, 'create'])->name('article.create');
-        Route::any('article/store', [AdminArticleController::class, 'store'])->name('article.store');
-        Route::any('article/edit/{news}', [AdminArticleController::class, 'edit'])->name('article.edit');   
-        Route::any('article/update/{news}', [AdminArticleController::class, 'update'])->name('article.update');   
+        Route::get('article/create', [AdminArticleController::class, 'create'])->name('article.create');
+        Route::post('article/store', [AdminArticleController::class, 'store'])->name('article.store');
+        Route::get('article/edit/{news}', [AdminArticleController::class, 'edit'])->name('article.edit');   
+        Route::put('article/update/{news}', [AdminArticleController::class, 'update'])->name('article.update');   
     
     });  
 
+ 
 });
+ 
 
 
 
@@ -135,6 +143,10 @@ Route::get('/sessions' , function(){
     session()->put('mysession', 'News session');
 });
 
-
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('laravel-filemanager', [LfmController::class, 'show']);
+    Route::post('laravel-filemanager/upload', [UploadController::class, 'upload']);
+    // list all lfm routes here...
+});
 
 

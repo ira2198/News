@@ -10,7 +10,7 @@
     <h2 class="descript text-center mb-5">Create article</h2>
     <div class="d-flex flex-column align-items-center">
 
-        <form class="d-flex flex-column w-50" action="{{route ('admin.article.store')}}" method ="post">
+        <form class="d-flex flex-column w-50" action="{{route ('admin.article.store')}}" enctype="multipart/form-data" method ="post">
 
             @csrf
 
@@ -79,14 +79,32 @@
                 @error("status")<p class="text-danger"> {{$message}}</p> @enderror  
             </div>
 
+            
+            <div class="">
+                <label  class="form-check-label mb-2 text-info-emphasis fw-medium">Image</label>
+                <input type="file" name='main_img' class="form-control mb-3" value="{{old ('main_img')}}">
+                @error("main_img")<p class="text-danger"> {{$message}}</p> @enderror 
+                
+            </div> 
+
             <div class=" mb-4"> <p class="text-info-emphasis fw-medium">Content:</p>
-                <input id="x" value="" type="hidden" name="text" value="{!! old('text') !!}">
-                <trix-editor input="x" value="{!! old('text') !!}"></trix-editor>
+                <textarea name="text" id="text" rows="30"  value="{{old('text')}}"></textarea>
                 @error("text")<p class="text-danger"> {{$message}}</p> @enderror  
             </div>
             
             <button class="btn btn-info">To publish</button>
         </form>
      
+        @push('jsTextEditor')
+
+        <script>
+            ClassicEditor
+                .create( document.querySelector( '#text' ) )
+                .catch( error => {
+                    console.error( error );
+                } );
+        </script>
+            
+        @endpush
 
 @endsection
